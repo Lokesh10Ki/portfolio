@@ -148,7 +148,7 @@ function SkillsPage() {
                   transform={`translate(${pos.x}, ${pos.y})`}
                   onMouseEnter={() => setHovered(n.id)}
                   onMouseLeave={() => setHovered(null)}
-                  style={{ cursor: "pointer", opacity: dim ? 0.25 : 1, transition: "opacity 0.25s" }}
+                  style={{ cursor: "pointer", opacity: dim ? 0.25 : 1, transition: "opacity 0.25s"}}
                 >
                   <circle r={hovered === n.id ? 22 : 16} fill={cat.color} opacity={0.12} />
                   <circle

@@ -99,7 +99,7 @@ function ProjectPage() {
                 ))}
               </div>
             </div>
-            <a
+            {/* <a
               href={p.github}
               target="_blank"
               rel="noreferrer"
@@ -112,9 +112,9 @@ function ProjectPage() {
                   <div className="mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">source · docs</div>
                 </div>
               </div>
-              <span className="text-muted-foreground group-hover:text-foreground">→</span>
+              <span className="text-muted-foreground group-hover:text-foreground">→</span> 
             </a>
-            <div className="glass rounded-2xl p-6">
+            <div className="glass rounded-2xl p-6"> 
               <Label>Screenshots</Label>
               <div className="mt-3 grid grid-cols-2 gap-2">
                 {[0, 1, 2, 3].map((i) => (
@@ -122,11 +122,11 @@ function ProjectPage() {
                     <ImageIcon size={16} />
                   </div>
                 ))}
-              </div>
+              </div> 
               <div className="mono mt-3 text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
                 // media redacted for enterprise NDA
-              </div>
-            </div>
+              </div> 
+            </div> */}
           </aside>
         </div>
       </div>
