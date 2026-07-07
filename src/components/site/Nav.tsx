@@ -22,7 +22,7 @@ export function Nav() {
           </div>
           <div className="hidden sm:block">
             <div className="text-sm font-semibold tracking-tight">Lokesh Devaraj</div>
-            <div className="mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Data Platform</div>
+            <div className="mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Data Engineer</div>
           </div>
         </Link>
 
