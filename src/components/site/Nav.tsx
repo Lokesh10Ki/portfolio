@@ -22,7 +22,9 @@ export function Nav() {
           </div>
           <div className="hidden sm:block">
             <div className="text-sm font-semibold tracking-tight">Lokesh Devaraj</div>
-            <div className="mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Data Engineer</div>
+            <div className="mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+              Data Engineer
+            </div>
           </div>
         </Link>
 
@@ -43,10 +45,10 @@ export function Nav() {
         <div className="hidden md:flex items-center gap-2">
           <span className="mono flex items-center gap-2 rounded-full border border-border px-2.5 py-1 text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
             <span className="relative flex h-1.5 w-1.5">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75 motion-reduce:animate-none" />
               <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
             </span>
-            Available
+            Open to roles
           </span>
         </div>
 
@@ -54,6 +56,7 @@ export function Nav() {
           onClick={() => setOpen((o) => !o)}
           className="md:hidden rounded-md p-2 text-muted-foreground hover:text-foreground"
           aria-label="Toggle menu"
+          aria-expanded={open}
         >
           {open ? <X size={18} /> : <Menu size={18} />}
         </button>

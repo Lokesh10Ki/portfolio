@@ -14,10 +14,12 @@ export function SectionHeading({
   eyebrow,
   title,
   description,
+  as: Heading = "h2",
 }: {
   eyebrow: string;
   title: ReactNode;
   description?: ReactNode;
+  as?: "h1" | "h2";
 }) {
   return (
     <motion.div
@@ -28,9 +30,9 @@ export function SectionHeading({
       className="max-w-3xl"
     >
       <SectionEyebrow>{eyebrow}</SectionEyebrow>
-      <h2 className="mt-4 text-4xl md:text-5xl font-semibold tracking-tight text-gradient">
+      <Heading className="mt-4 text-4xl md:text-5xl font-semibold tracking-tight text-gradient">
         {title}
-      </h2>
+      </Heading>
       {description && (
         <p className="mt-4 text-base md:text-lg text-muted-foreground leading-relaxed">
           {description}
@@ -53,7 +55,7 @@ export function PageHeader({
     <div className="container-pro pt-32 pb-16 relative">
       <div className="absolute inset-0 grid-bg opacity-40 pointer-events-none [mask-image:radial-gradient(ellipse_at_top,black,transparent_60%)]" />
       <div className="relative">
-        <SectionHeading eyebrow={eyebrow} title={title} description={description} />
+        <SectionHeading as="h1" eyebrow={eyebrow} title={title} description={description} />
       </div>
     </div>
   );

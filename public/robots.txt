@@ -1,2 +1,4 @@
 User-agent: *
 Allow: /
+
+Sitemap: https://portfolio-two-pearl-h5t7nl3jfu.vercel.app/sitemap.xml

@@ -3,17 +3,43 @@ import { PROFILE } from "@/data/portfolio";
 import { SectionHeading } from "./Section";
 
 const STATS = [
-  { label: "Years Experience", value: PROFILE.yearsExperience, suffix: "+" },
-  { label: "Projects Delivered", value: PROFILE.projectsDelivered, suffix: "+" },
-  { label: "Enterprise Platforms", value: PROFILE.enterprisePlatforms, suffix: "" },
-  { label: "Business Domains", value: PROFILE.businessDomains, suffix: "" },
+  { label: "Years Experience", value: PROFILE.yearsExperience },
+  { label: "Cloud Platforms · Azure & AWS", value: "2" },
+  { label: "Power BI Dashboards", value: "15+" },
+  { label: "Roles at JMAN · Intern → Solutions Enabler", value: "4" },
 ];
 
 const TIMELINE = [
-  { year: "2022", title: "Started with web development", body: "Built responsive interfaces and backend services during a remote internship at Simtrak Solutions." },
-  { year: "2024", title: "Joined JMAN Group", body: "Gained hands-on experience with ETL, Azure Data Factory, SQL and business intelligence workflows." },
-  { year: "2025", title: "Moved into data engineering", body: "Delivered Databricks and PySpark pipelines for financial and operational reporting." },
-  { year: "2026", title: "Leading platform work", body: "Now shaping enterprise data platforms and AI-assisted analytics workflows across multiple business entities." },
+  {
+    year: "2022",
+    title: "Started with web development",
+    body: "Built interfaces, APIs and tests during a remote internship at Simtrak Solutions while studying Information Technology.",
+  },
+  {
+    year: "Jan 2024",
+    title: "Joined JMAN Group as a Software Intern",
+    body: "Structured training across data engineering, BI, cloud and DevOps; built Azure Data Factory and SQL assignments plus Python automation and web scraping with Selenium, Playwright and BeautifulSoup.",
+  },
+  {
+    year: "Jun 2024",
+    title: "Software Engineer",
+    body: "Built Equiflow, a full-stack private equity data platform with Microsoft SSO, versioned document workflows and AI-generated dashboards.",
+  },
+  {
+    year: "Apr 2025",
+    title: "Senior Software Engineer: into data engineering",
+    body: "Databricks and PySpark pipelines, dimensional models and Power BI semantic models for a financial analytics Lakehouse serving 17 business entities.",
+  },
+  {
+    year: "Apr 2026",
+    title: "Solutions Enabler",
+    body: "Drove design and delivery of enterprise data solutions across the group, led revenue reconciliation work and built AI proofs of concept on Mosaic AI and Claude MCP.",
+  },
+  {
+    year: "Aug 2026",
+    title: "Joined Presidio",
+    body: "Migrating an enterprise Databricks Lakehouse from Azure to AWS with Unity Catalog governance, Terraform and automated reconciliation, and building agentic systems through the AI400 program.",
+  },
 ];
 
 export function About() {
@@ -22,8 +48,8 @@ export function About() {
       <div className="container-pro">
         <SectionHeading
           eyebrow="About / operator profile"
-          title={<>The operator behind the platform.</>}
-          description="I don't ship dashboards — I ship data platforms. Two-plus years building lakehouses, semantic layers and AI-assisted analytics for finance, operations and executive reporting."
+          title={<>The engineer behind the platform.</>}
+          description="Data engineering is as much about understanding the business as it is about writing pipelines. I've spent 2.5+ years doing both: Lakehouses, dimensional models and governed reporting for finance, operations and executive teams."
         />
 
         <div className="mt-14 grid grid-cols-1 lg:grid-cols-5 gap-8">
@@ -38,7 +64,7 @@ export function About() {
             <div className="absolute -top-16 -right-16 h-40 w-40 rounded-full bg-[#2563EB]/20 blur-3xl" />
             <div className="relative">
               <div className="flex items-center gap-4">
-                <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-[#2563EB] to-[#38BDF8] flex items-center justify-center text-xl font-semibold text-white shadow-[0_0_30px_rgba(37,99,235,0.4)]">
+                <div className="h-14 w-14 shrink-0 rounded-2xl bg-gradient-to-br from-[#2563EB] to-[#38BDF8] flex items-center justify-center text-xl font-semibold text-white shadow-[0_0_30px_rgba(37,99,235,0.4)]">
                   LD
                 </div>
                 <div>
@@ -50,20 +76,25 @@ export function About() {
               </div>
               <div className="mt-6 space-y-3 text-sm text-muted-foreground leading-relaxed">
                 <p>
-                  Currently building enterprise reporting platforms for JMAN Group that support 17 business entities, with Power BI dashboards spanning revenue, utilisation, contribution, GRR/NRR and executive KPIs.
+                  <span className="text-foreground">Now at Presidio</span>, moving an enterprise
+                  Databricks Lakehouse from Azure to AWS: S3 re-platforming, Unity Catalog,
+                  automated data-parity checks and Terraform-based CI/CD.
                 </p>
-                <p>Previously led revenue reconciliation and KPI validation work for a private equity exit engagement, strengthening reporting trust for finance leadership.</p>
+                <p>
+                  <span className="text-foreground">Previously at JMAN Group</span>, I built and
+                  owned a financial analytics Lakehouse for a professional services group of 17
+                  companies, and led the revenue reconciliation behind a private equity exit.
+                </p>
               </div>
               <dl className="mt-6 grid grid-cols-2 gap-3 border-t border-border pt-6">
                 {STATS.map((s) => (
-                  <div key={s.label}>
-                    <dd className="text-3xl font-semibold tracking-tight text-gradient-brand">
-                      {s.value}
-                      {s.suffix}
-                    </dd>
+                  <div key={s.label} className="flex flex-col-reverse">
                     <dt className="mono mt-1 text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
                       {s.label}
                     </dt>
+                    <dd className="text-3xl font-semibold tracking-tight text-gradient-brand">
+                      {s.value}
+                    </dd>
                   </div>
                 ))}
               </dl>
@@ -78,7 +109,7 @@ export function About() {
             <ol className="relative border-l border-border pl-6 space-y-8">
               {TIMELINE.map((t, i) => (
                 <motion.li
-                  key={t.year}
+                  key={t.title}
                   initial={{ opacity: 0, x: -12 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true, margin: "-50px" }}
@@ -86,7 +117,9 @@ export function About() {
                   className="relative"
                 >
                   <span className="absolute -left-[31px] top-1.5 h-2.5 w-2.5 rounded-full bg-[#2563EB] shadow-[0_0_0_4px_rgba(37,99,235,0.15)]" />
-                  <div className="mono text-[11px] uppercase tracking-[0.18em] text-[#38BDF8]">{t.year}</div>
+                  <div className="mono text-[11px] uppercase tracking-[0.18em] text-[#38BDF8]">
+                    {t.year}
+                  </div>
                   <div className="mt-1 text-lg font-medium">{t.title}</div>
                   <div className="mt-1 text-sm text-muted-foreground">{t.body}</div>
                 </motion.li>

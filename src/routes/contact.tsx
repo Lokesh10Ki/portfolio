@@ -1,26 +1,36 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { Github, Linkedin, Mail, MapPin } from "lucide-react";
-import { PROFILE } from "@/data/portfolio";
+import { FileText, Github, Linkedin, Mail, MapPin } from "lucide-react";
+import { PROFILE, absoluteUrl } from "@/data/portfolio";
 import { PageHeader } from "@/components/site/Section";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
       { title: "Contact — Lokesh Devaraj" },
-      { name: "description", content: "Get in touch about enterprise data platform work, consulting engagements or AI analytics projects." },
+      {
+        name: "description",
+        content:
+          "Contact Lokesh Devaraj, Data Engineer, about Data Engineering roles, Lakehouse architecture and AI-assisted analytics.",
+      },
       { property: "og:title", content: "Contact — Lokesh Devaraj" },
-      { property: "og:url", content: "/contact" },
+      { property: "og:url", content: absoluteUrl("/contact") },
     ],
-    links: [{ rel: "canonical", href: "/contact" }],
+    links: [{ rel: "canonical", href: absoluteUrl("/contact") }],
   }),
   component: ContactPage,
 });
 
 const CHANNELS = [
   { icon: Mail, label: "Email", value: PROFILE.email, href: `mailto:${PROFILE.email}` },
-  { icon: Github, label: "GitHub", value: "@lokesh", href: PROFILE.github },
-  { icon: Linkedin, label: "LinkedIn", value: "in/lokesh", href: PROFILE.linkedin },
+  {
+    icon: Linkedin,
+    label: "LinkedIn",
+    value: `in/${PROFILE.linkedinHandle}`,
+    href: PROFILE.linkedin,
+  },
+  { icon: Github, label: "GitHub", value: `@${PROFILE.githubHandle}`, href: PROFILE.github },
+  { icon: FileText, label: "Resume", value: "Download PDF", href: PROFILE.resumePdf },
   { icon: MapPin, label: "Location", value: PROFILE.location, href: null },
 ];
 
@@ -30,7 +40,7 @@ function ContactPage() {
       <PageHeader
         eyebrow="Contact / open the channel"
         title={<>Let's build a data platform.</>}
-        description="Consulting, staff-level roles, and enterprise data & AI engagements. Reply within 48 hours."
+        description="Hiring for a Data Engineering role, or want to talk Lakehouse architecture or AI in data engineering? Email is the fastest way to reach me. I reply within 48 hours."
       />
       <section className="container-pro pb-24">
         <div className="grid lg:grid-cols-2 gap-6">
@@ -50,20 +60,28 @@ function ContactPage() {
             }}
             className="glass rounded-2xl p-7 space-y-4"
           >
-            <div className="mono text-[10px] uppercase tracking-[0.24em] text-muted-foreground">// new_inquiry.msg</div>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="mono text-[10px] uppercase tracking-[0.24em] text-muted-foreground">
+              // new_inquiry.msg
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <Field label="Name" name="name" required />
               <Field label="Email" name="email" type="email" required />
             </div>
             <Field label="Subject" name="subject" />
             <div>
-              <label className="mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Message</label>
+              <label
+                htmlFor="contact-message"
+                className="mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground"
+              >
+                Message
+              </label>
               <textarea
+                id="contact-message"
                 name="message"
                 required
                 rows={5}
                 className="mt-2 w-full rounded-lg border border-border bg-white/[0.02] px-3 py-2.5 text-sm outline-none focus:border-[#2563EB] focus:ring-2 focus:ring-[#2563EB]/20 transition-all resize-none"
-                placeholder="Tell me about your data platform..."
+                placeholder="Tell me about the role or the data platform you're building…"
               />
             </div>
             <button
@@ -89,13 +107,23 @@ function ContactPage() {
                     <Icon size={16} className="text-[#38BDF8]" />
                   </div>
                   <div>
-                    <div className="mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">{c.label}</div>
-                    <div className="mt-0.5 text-sm">{c.value}</div>
+                    <div className="mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+                      {c.label}
+                    </div>
+                    <div className="mt-0.5 text-sm break-all">{c.value}</div>
                   </div>
                 </div>
               );
               return c.href ? (
-                <a key={c.label} href={c.href} target={c.href.startsWith("http") ? "_blank" : undefined} rel="noreferrer">
+                <a
+                  key={c.label}
+                  href={c.href}
+                  target={c.href.startsWith("http") ? "_blank" : undefined}
+                  rel="noreferrer"
+                  download={
+                    c.label === "Resume" ? "Lokesh_Devaraj_Data_Engineer_Resume.pdf" : undefined
+                  }
+                >
                   {inner}
                 </a>
               ) : (
@@ -104,13 +132,15 @@ function ContactPage() {
             })}
 
             <div className="glass rounded-2xl p-5">
-              <div className="mono text-[10px] uppercase tracking-[0.24em] text-muted-foreground">// availability</div>
+              <div className="mono text-[10px] uppercase tracking-[0.24em] text-muted-foreground">
+                // availability
+              </div>
               <div className="mt-3 flex items-center gap-2">
                 <span className="relative flex h-2 w-2">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75 motion-reduce:animate-none" />
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
                 </span>
-                <span className="text-sm">Accepting Q2 engagements — 1 slot remaining</span>
+                <span className="text-sm">Open to Data Engineering roles</span>
               </div>
             </div>
           </motion.div>
@@ -120,11 +150,27 @@ function ContactPage() {
   );
 }
 
-function Field({ label, name, type = "text", required = false }: { label: string; name: string; type?: string; required?: boolean }) {
+function Field({
+  label,
+  name,
+  type = "text",
+  required = false,
+}: {
+  label: string;
+  name: string;
+  type?: string;
+  required?: boolean;
+}) {
   return (
     <div>
-      <label className="mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">{label}</label>
+      <label
+        htmlFor={`contact-${name}`}
+        className="mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground"
+      >
+        {label}
+      </label>
       <input
+        id={`contact-${name}`}
         name={name}
         type={type}
         required={required}

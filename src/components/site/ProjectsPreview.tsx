@@ -3,6 +3,7 @@ import { Link } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
 import { PROJECTS } from "@/data/portfolio";
 import { SectionHeading } from "./Section";
+import { StatusBadge } from "./StatusBadge";
 
 export function ProjectsPreview() {
   return (
@@ -12,7 +13,7 @@ export function ProjectsPreview() {
           <SectionHeading
             eyebrow="Selected work / v.production"
             title={<>Platforms in production.</>}
-            description="Five case studies that turned messy source systems into governed, revenue-moving platforms."
+            description="Case studies from Presidio and JMAN Group: Lakehouse migrations, financial analytics platforms and AI on enterprise data."
           />
           <Link
             to="/projects"
@@ -23,7 +24,7 @@ export function ProjectsPreview() {
         </div>
 
         <div className="mt-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {PROJECTS.slice(0, 6).map((p, i) => (
+          {PROJECTS.slice(0, 3).map((p, i) => (
             <motion.div
               key={p.slug}
               initial={{ opacity: 0, y: 24 }}
@@ -38,15 +39,23 @@ export function ProjectsPreview() {
               >
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-[#2563EB]/10 via-transparent to-transparent pointer-events-none" />
                 <div className="relative">
-                  <div className="mono text-[10px] uppercase tracking-[0.24em] text-muted-foreground">
-                    Case study · {String(i + 1).padStart(2, "0")}
+                  <div className="flex items-center justify-between gap-3">
+                    <div className="mono text-[10px] uppercase tracking-[0.24em] text-muted-foreground">
+                      {p.company} · {p.period}
+                    </div>
+                    <StatusBadge status={p.status} />
                   </div>
-                  <h3 className="mt-4 text-xl font-semibold tracking-tight leading-tight">{p.name}</h3>
+                  <h3 className="mt-4 text-xl font-semibold tracking-tight leading-tight">
+                    {p.name}
+                  </h3>
                   <p className="mt-2 text-sm text-muted-foreground line-clamp-2">{p.tagline}</p>
 
                   <div className="mt-5 flex flex-wrap gap-1.5">
                     {p.stack.slice(0, 4).map((t) => (
-                      <span key={t} className="mono rounded-md border border-border px-2 py-0.5 text-[10px] text-muted-foreground">
+                      <span
+                        key={t}
+                        className="mono rounded-md border border-border px-2 py-0.5 text-[10px] text-muted-foreground"
+                      >
                         {t}
                       </span>
                     ))}
